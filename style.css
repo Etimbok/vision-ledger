@@ -1,4 +1,4 @@
-/* 1. CORE STYLES */
+/* 1. GLOBAL STYLES */
 :root {
     --primary: #00f2fe;
     --secondary: #4facfe;
@@ -7,80 +7,212 @@
     --glass-border: rgba(255, 255, 255, 0.12);
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
 
-body { 
-    background-color: var(--bg-dark); 
-    color: white; 
-    overflow-x: hidden; 
+body {
+    background-color: var(--bg-dark);
+    color: white;
+    overflow-x: hidden;
     line-height: 1.6;
 }
 
-/* 2. BACKGROUND BLOBS */
-.bg-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
-.blob, .blob2 {
-    position: absolute; width: 300px; height: 300px; 
-    background: var(--primary); filter: blur(100px); 
-    border-radius: 50%; opacity: 0.2;
+/* 2. THE MOVING BACKGROUND */
+.bg-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: radial-gradient(circle at top right, #1a1a2e, #0a0a0c);
 }
-.blob2 { right: 0; bottom: 0; background: #7000ff; }
+
+.blob, .blob2 {
+    position: absolute;
+    width: 450px;
+    height: 450px;
+    background: var(--primary);
+    filter: blur(100px);
+    border-radius: 50%;
+    opacity: 0.2;
+    animation: drift 15s infinite alternate ease-in-out;
+}
+
+.blob2 {
+    right: -50px;
+    bottom: -50px;
+    background: #7000ff;
+    animation-duration: 20s;
+    animation-direction: alternate-reverse;
+}
+
+@keyframes drift {
+    from { transform: translate(0, 0) scale(1); }
+    to { transform: translate(80px, 40px) scale(1.1); }
+}
+
+.grid-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+                      linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
+    background-size: 40px 40px;
+}
 
 /* 3. NAVIGATION */
 .glass-nav {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 20px 8%; background: var(--glass); backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 8%;
+    background: var(--glass);
+    backdrop-filter: blur(15px);
     border-bottom: 1px solid var(--glass-border);
 }
+
 .logo { font-size: 1.5rem; font-weight: 800; }
 .logo span { color: var(--primary); }
-.nav-links { display: flex; list-style: none; gap: 20px; }
-.nav-links a { text-decoration: none; color: #ccc; font-size: 0.9rem; }
-.btn-glow { 
-    padding: 8px 15px; background: transparent; border: 1px solid var(--primary); 
-    color: var(--primary); border-radius: 5px; cursor: pointer;
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 25px;
 }
 
-/* 4. HERO SECTION */
-.hero { padding: 80px 8% 40px; text-align: center; }
-.badge { 
-    background: var(--glass); padding: 5px 15px; border-radius: 20px; 
-    font-size: 0.8rem; border: 1px solid var(--glass-border); color: var(--primary);
+.nav-links a {
+    text-decoration: none;
+    color: #ccc;
+    font-size: 0.9rem;
+    transition: 0.3s;
 }
-h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 800; margin: 20px 0; line-height: 1.1; }
+
+.nav-links a:hover { color: var(--primary); }
+
+.btn-glow {
+    padding: 10px 20px;
+    background: transparent;
+    border: 1px solid var(--primary);
+    color: var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 0 15px rgba(0, 242, 254, 0.2);
+}
+
+/* 4. HERO CONTENT */
+.hero {
+    padding: 100px 8% 60px;
+    text-align: center;
+}
+
+.badge {
+    background: var(--glass);
+    padding: 6px 18px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+    color: var(--primary);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+}
+
+h1 {
+    font-size: clamp(2.2rem, 8vw, 4rem);
+    font-weight: 800;
+    margin: 25px 0;
+    line-height: 1.1;
+}
+
 h1 span { color: var(--primary); }
-p { max-width: 600px; margin: 0 auto 30px; color: #aaa; }
 
-.hero-btns { display: flex; justify-content: center; gap: 15px; }
-.btn-primary, .btn-secondary { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; }
-.btn-primary { background: var(--primary); color: black; }
-.btn-secondary { background: var(--glass); color: white; border: 1px solid var(--glass-border); }
+p {
+    max-width: 650px;
+    margin: 0 auto 35px;
+    color: #aaa;
+    font-size: 1.1rem;
+}
 
-/* 5. TICKER (The moving text) */
-.ticker-wrap { background: rgba(0,0,0,0.5); padding: 10px 0; margin: 40px 0; overflow: hidden; }
-.ticker { display: flex; gap: 50px; white-space: nowrap; animation: slide 20s linear infinite; }
-.ticker-item { font-size: 0.8rem; color: var(--primary); }
-@keyframes slide { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+.hero-btns {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+}
+
+.btn-primary, .btn-secondary {
+    padding: 14px 30px;
+    border-radius: 50px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0.3s;
+    border: none;
+}
+
+.btn-primary { background: var(--primary); color: #000; }
+.btn-secondary { background: var(--glass); color: #fff; border: 1px solid var(--glass-border); }
+
+/* 5. TICKER */
+.ticker-wrap {
+    background: rgba(0,0,0,0.4);
+    padding: 15px 0;
+    overflow: hidden;
+    border-top: 1px solid var(--glass-border);
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.ticker {
+    display: flex;
+    gap: 60px;
+    white-space: nowrap;
+    animation: scroll 25s linear infinite;
+}
+
+@keyframes scroll {
+    from { transform: translateX(100%); }
+    to { transform: translateX(-100%); }
+}
+
+.ticker-item { font-size: 0.85rem; color: var(--primary); opacity: 0.8; }
 
 /* 6. PURPOSE SECTION */
-.purpose-section { padding: 60px 8%; text-align: center; }
+.purpose-section { padding: 80px 8%; text-align: center; }
+.section-header h2 { font-size: 2.5rem; margin-top: 15px; }
 .section-header h2 span { color: var(--primary); }
-.purpose-grid { 
-    display: flex; flex-wrap: wrap; justify-content: center; 
-    gap: 25px; margin-top: 40px; 
-}
-.purpose-card {
-    background: var(--glass); padding: 30px; border-radius: 20px;
-    border: 1px solid var(--glass-border); width: 300px; text-align: left;
-    backdrop-filter: blur(10px);
-}
-.purpose-card .icon { font-size: 2rem; margin-bottom: 15px; }
 
-/* 7. THE "PHONE FIX" */
+.purpose-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 50px;
+}
+
+.purpose-card {
+    background: var(--glass);
+    padding: 35px;
+    border-radius: 24px;
+    border: 1px solid var(--glass-border);
+    width: 320px;
+    text-align: left;
+    backdrop-filter: blur(10px);
+    transition: 0.3s;
+}
+
+.purpose-card:hover { border-color: var(--primary); transform: translateY(-5px); }
+.purpose-card .icon { font-size: 2.2rem; margin-bottom: 20px; }
+
+/* 7. SUPERVISOR PHONE REPAIR */
 @media (max-width: 768px) {
     .glass-nav { flex-direction: column; gap: 15px; padding: 15px; }
-    .nav-links { gap: 10px; font-size: 0.7rem; }
-    .hero { padding-top: 40px; }
+    .nav-links { gap: 12px; font-size: 0.75rem; }
+    
+    .hero { padding-top: 50px; }
+    h1 { font-size: 2.4rem; }
+    
     .hero-btns { flex-direction: column; align-items: center; }
-    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
-    .purpose-card { width: 100%; max-width: 340px; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 300px; }
+    
+    .purpose-card { width: 100%; max-width: 90%; }
 }
