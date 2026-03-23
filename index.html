@@ -3,83 +3,86 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>skills-Swap | The Vision Ledger</title> 
+    <title>Skills-Swap | The Vision Ledger</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        /* ALL YOUR STYLES GO HERE - NO LINK NEEDED */
+        :root { --primary: #00f2fe; --secondary: #4facfe; --bg: #0a0a0c; --glass: rgba(255,255,255,0.05); --glass-border: rgba(255,255,255,0.12); }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
+        body { background-color: var(--bg); color: white; overflow-x: hidden; line-height: 1.6; }
+        
+        .bg-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+        .blob, .blob2 { position: absolute; width: 300px; height: 300px; background: var(--primary); filter: blur(100px); border-radius: 50%; opacity: 0.2; }
+        .blob2 { right: 0; bottom: 0; background: #7000ff; }
+
+        .glass-nav { display: flex; justify-content: space-between; align-items: center; padding: 20px 8%; background: var(--glass); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass-border); position: sticky; top: 0; z-index: 100; }
+        .logo { font-size: 1.5rem; font-weight: 800; color: white; }
+        .logo span { color: var(--primary); }
+        .nav-links { display: flex; list-style: none; gap: 20px; }
+        .nav-links a { text-decoration: none; color: #ccc; font-size: 0.9rem; }
+        .btn-glow { padding: 8px 15px; background: transparent; border: 1px solid var(--primary); color: var(--primary); border-radius: 5px; cursor: pointer; }
+
+        .hero { padding: 80px 8% 40px; text-align: center; }
+        h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+        h1 span { color: var(--primary); }
+        p { max-width: 600px; margin: 0 auto 30px; color: #aaa; }
+
+        .hero-btns { display: flex; justify-content: center; gap: 15px; }
+        .btn-primary, .btn-secondary { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; }
+        .btn-primary { background: var(--primary); color: black; }
+        .btn-secondary { background: var(--glass); color: white; border: 1px solid var(--glass-border); }
+
+        .purpose-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 25px; margin-top: 40px; }
+        .purpose-card { background: var(--glass); padding: 30px; border-radius: 20px; border: 1px solid var(--glass-border); width: 300px; text-align: left; backdrop-filter: blur(10px); }
+        
+        .ticker-wrap { background: rgba(0,0,0,0.5); padding: 10px 0; margin: 40px 0; overflow: hidden; }
+        .ticker { display: flex; gap: 50px; white-space: nowrap; animation: slide 25s linear infinite; }
+        @keyframes slide { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+        @media (max-width: 768px) {
+            .glass-nav { flex-direction: column; gap: 15px; padding: 15px; }
+            .nav-links { gap: 10px; font-size: 0.7rem; }
+            .hero-btns { flex-direction: column; align-items: center; }
+            .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
+            .purpose-card { width: 100%; max-width: 90%; }
+        }
+    </style>
 </head>
 <body>
-
-    <div class="bg-wrapper">
-        <div class="blob"></div>
-        <div class="blob2"></div>
-        <div class="grid-overlay"></div>
-    </div>
-
-    <header>
-        <nav class="glass-nav">
-            <div class="logo">SKILLS <span>SWAP</span></div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#purpose">Our Purpose</a></li>
-                <li><a href="#ledger">The Ledger</a></li>
-            </ul>
-            <button class="btn-glow">Connect Wallet</button>
-        </nav>
-    </header>
-
+    <div class="bg-wrapper"><div class="blob"></div><div class="blob2"></div></div>
+    <header><nav class="glass-nav">
+        <div class="logo">SKILLS <span>SWAP</span></div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#purpose">Our Purpose</a></li>
+            <li><a href="#ledger">The Ledger</a></li>
+        </ul>
+        <button class="btn-glow">Connect Wallet</button>
+    </nav></header>
     <main>
         <section class="hero" id="home">
-            <div class="hero-content">
-                <span class="badge">V1.0 Restart Vision</span>
-                <h1>Trade Your <span>Talent</span>,<br> Not Your Cash.</h1>
-                <p>The Vision Ledger is a revolutionary skill-exchange ecosystem. Swap coding for design, tutoring for styling, and build the future together.</p>
-                
-                <div class="hero-btns">
-                    <button class="btn-primary">Start Swapping</button>
-                    <button class="btn-secondary">View The Ledger</button>
-                </div>
+            <span style="color:var(--primary); font-size: 0.8rem; border: 1px solid var(--glass-border); padding: 5px 15px; border-radius: 20px;">V1.0 Restart Vision</span>
+            <h1>Trade Your <span>Talent</span>,<br> Not Your Cash.</h1>
+            <p>The Vision Ledger is a revolutionary skill-exchange ecosystem. Swap coding for design, tutoring for styling, and build the future together.</p>
+            <div class="hero-btns">
+                <button class="btn-primary">Start Swapping</button>
+                <button class="btn-secondary">View The Ledger</button>
             </div>
         </section>
 
-        <div class="ticker-wrap">
-            <div class="ticker">
-                <span class="ticker-item">● HTML/CSS value ↑ +15%</span>
-                <span class="ticker-item">● UI Design swapped for Content Writing</span>
-                <span class="ticker-item">● C++ Tutoring needed in 200L</span>
-                <span class="ticker-item">● Respect Credits: 2.4k Distributed</span>
-                <span class="ticker-item">● HTML/CSS value ↑ +15%</span>
-                <span class="ticker-item">● UI Design swapped for Content Writing</span>
-            </div>
-        </div>
+        <div class="ticker-wrap"><div class="ticker">
+            <span style="color:var(--primary)">● HTML/CSS value ↑ +15% ● UI Design swapped for Content Writing ● C++ Tutoring needed in 200L ● Respect Credits: 2.4k Distributed</span>
+        </div></div>
 
-        <section class="purpose-section" id="purpose">
-            <div class="section-header">
-                <span class="badge">The Mission</span>
-                <h2>Our <span>Group Purpose</span></h2>
-                <p>We aren't just building code; we are building a survival ecosystem for students under the Restart Vision.</p>
-            </div>
-
+        <section class="purpose-section" id="purpose" style="text-align:center; padding: 60px 8%;">
+            <h2 style="font-size: 2rem; margin-bottom: 10px;">Our <span>Group Purpose</span></h2>
+            <p>We aren't just building code; we are building a survival ecosystem for students.</p>
             <div class="purpose-grid">
-                <div class="purpose-card">
-                    <div class="icon">⚡</div>
-                    <h3>Skill Over Cash</h3>
-                    <p>In a world where gadgets and tutoring are expensive, your talent is your currency. Swap a logo for a haircut or a line of code for a meal.</p>
-                </div>
-
-                <div class="purpose-card">
-                    <div class="icon">📊</div>
-                    <h3>The Vision Ledger</h3>
-                    <p>Every contribution is tracked. Build your "Respect Credits" and "Value Score" to prove your reliability in the student ecosystem.</p>
-                </div>
-
-                <div class="purpose-card">
-                    <div class="icon">🤝</div>
-                    <h3>Restart Vision</h3>
-                    <p>Our mission is to foster collaboration. No student should struggle alone when someone next door has the solution.</p>
-                </div>
+                <div class="purpose-card"><h3>⚡ Skill Over Cash</h3><p>In a world where gadgets are expensive, your talent is your currency.</p></div>
+                <div class="purpose-card"><h3>📊 The Vision Ledger</h3><p>Every contribution is tracked. Build your "Respect Credits" to prove your reliability.</p></div>
+                <div class="purpose-card"><h3>🤝 Restart Vision</h3><p>Our mission is to foster collaboration. No student should struggle alone.</p></div>
             </div>
         </section>
     </main>
-
 </body>
 </html>
