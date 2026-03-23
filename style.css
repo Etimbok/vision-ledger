@@ -1,9 +1,10 @@
+/* 1. the colours */
 :root {
-    --primary: #00f2fe;
-    --secondary: #4facfe;
-    --bg-dark: #0a0a0c;
-    --glass: rgba(255, 255, 255, 0.05);
-    --glass-border: rgba(255, 255, 255, 0.1);
+    --primary: #00d2ff;      /* Electric Blue */
+    --secondary: #9333ea;    /* Cyber Purple */
+    --bg: #030712;
+    --glass: rgba(255, 255, 255, 0.03);
+    --border: rgba(255, 255, 255, 0.1);
 }
 
 * {
@@ -11,126 +12,166 @@
     padding: 0;
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: var(--bg-dark);
-    color: white;
-    overflow-x: hidden; /* Prevents side-scrolling on phones */
+    background-color: var(--bg);
+    color: #fff;
+    overflow-x: hidden;
 }
 
-/* --- Animated Background --- */
+/* 2. THE MOVING BACKGROUND */
 .bg-wrapper {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     z-index: -1;
+    overflow: hidden;
+    background: #010409;
 }
 
 .blob, .blob2 {
     position: absolute;
-    width: clamp(200px, 50vw, 500px); /* Adjusts size based on screen */
-    height: clamp(200px, 50vw, 500px);
-    background: linear-gradient(45deg, var(--primary), var(--secondary));
-    filter: blur(80px);
+    width: 700px;
+    height: 700px;
     border-radius: 50%;
-    opacity: 0.3;
-    animation: move 20s infinite alternate;
+    filter: blur(100px);
+    opacity: 0.35; /* Made it a bit brighter to be obvious */
+}
+
+.blob {
+    background: var(--primary);
+    top: -100px;
+    left: -100px;
+    /* Speed set to 8s (Very Obvious) */
+    animation: moveFast 8s infinite alternate ease-in-out;
 }
 
 .blob2 {
-    right: -50px;
-    bottom: -50px;
-    background: #7000ff;
-    animation-delay: -5s;
+    background: var(--secondary);
+    bottom: -100px;
+    right: -100px;
+    /* Speed set to 10s */
+    animation: moveFastReverse 10s infinite alternate-reverse ease-in-out;
 }
 
-@keyframes move {
-    from { transform: translate(0, 0); }
-    to { transform: translate(50px, 50px) scale(1.1); }
+@keyframes moveFast {
+    0% { transform: translate(0,0) scale(1); }
+    100% { transform: translate(40vw, 40vh) scale(1.2); }
 }
 
-/* --- Navigation --- */
+@keyframes moveFastReverse {
+    0% { transform: translate(0,0) scale(1.2); }
+    100% { transform: translate(-40vw, -40vh) scale(1); }
+}
+
+.grid-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(var(--border) 1px, transparent 1px), 
+                      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size: 50px 50px;
+    mask-image: radial-gradient(circle at center, black, transparent 85%);
+}
+
+/* 3. THE ORIGINAL NAVBAR (HEADER) */
+header {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+
 .glass-nav {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 20px 5%;
-    background: var(--glass);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--glass-border);
+    padding: 20px 8%;
+    background: rgba(3, 7, 18, 0.5);
+    backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--border);
 }
 
-.logo {
-    font-size: clamp(1.1rem, 4vw, 1.5rem);
-    font-weight: 800;
-}
-
+.logo { font-size: 1.6rem; font-weight: 800; letter-spacing: 2px; }
 .logo span { color: var(--primary); }
 
-.nav-links {
-    display: flex;
-    list-style: none;
-    gap: 20px;
-}
+.nav-links { display: flex; list-style: none; }
+.nav-links li { margin: 0 20px; }
+.nav-links a { text-decoration: none; color: #ccc; transition: 0.3s; }
+.nav-links a:hover { color: var(--primary); }
 
-/* --- Hero Section --- */
-.hero-section {
-    padding: 60px 5%;
+/* 4. THE ORIGINAL HERO SECTION */
+.hero {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     text-align: center;
 }
 
-h1 {
-    font-size: clamp(2rem, 8vw, 4rem); /* Text shrinks on phones! */
-    font-weight: 800;
-    line-height: 1.2;
-    margin-bottom: 20px;
+.badge {
+    background: rgba(0, 210, 255, 0.1);
+    color: var(--primary);
+    padding: 6px 18px;
+    border-radius: 30px;
+    font-size: 0.8rem;
+    border: 1px solid var(--primary);
+    display: inline-block;
+    margin-bottom: 25px;
 }
 
-.gradient-text {
-    background: linear-gradient(90deg, var(--primary), var(--secondary));
+h1 { font-size: 4.5rem; font-weight: 800; margin-bottom: 20px; line-height: 1.1; }
+h1 span {
+    background: linear-gradient(to right, var(--primary), var(--secondary));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
-/* --- Card Container --- */
-.card-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap; /* Allows cards to drop to the next line */
-    padding-top: 40px;
+p {
+    color: #9ca3af;
+    max-width: 650px;
+    margin: 0 auto 40px;
+    font-size: 1.1rem;
 }
 
-.glass-card {
-    background: var(--glass);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid var(--glass-border);
-    backdrop-filter: blur(15px);
-    width: 100%;
-    max-width: 300px; /* Limits width so they don't look huge */
+/* 5. ORIGINAL BUTTON SIZES (FIXED) */
+.hero-btns button, .btn-glow {
+    padding: 15px 40px; /* Kept big and bold */
+    border-radius: 12px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    margin: 0 10px;
     transition: 0.3s;
 }
 
-/* --- MOBILE SPECIFIC FIXES --- */
-@media (max-width: 768px) {
-    .nav-links {
-        display: none; /* Hide links on phone to prevent overlap */
-    }
-    
-    .hero-section {
-        padding: 40px 5%;
-    }
+.btn-primary { background: var(--primary); border: none; color: #000; }
+.btn-secondary { background: transparent; border: 1px solid var(--border); color: #fff; }
+.btn-glow { padding: 10px 25px; border: 1px solid var(--primary); color: var(--primary); background: transparent; }
 
-    .card-container {
-        flex-direction: column; /* Stacks cards vertically */
-        align-items: center;
-    }
+.btn-primary:hover { transform: translateY(-5px); box-shadow: 0 10px 30px rgba(0,210,255,0.4); }
 
-    .glass-card {
-        max-width: 90%; /* Makes cards fit the phone screen width */
-    }
+/* 6. TICKER & PURPOSE (ORIGINAL) */
+.ticker-wrap {
+    width: 100%;
+    overflow: hidden;
+    background: rgba(255,255,255,0.02);
+    padding: 15px 0;
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
 }
+
+.ticker { display: flex; animation: tickerMove 20s linear infinite; }
+@keyframes tickerMove { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+.ticker-item { padding: 0 40px; color: var(--primary); font-size: 0.9rem; }
+
+.purpose-section { padding: 120px 8%; text-align: center; }
+.section-header h2 { font-size: 3.2rem; margin-bottom: 25px; }
+.purpose-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 60px; }
+.purpose-card { background: var(--glass); padding: 45px; border-radius: 24px; border: 1px solid var(--border); text-align: left; backdrop-filter: blur(10px); transition: 0.4s; }
+.purpose-card:hover { border-color: var(--primary); transform: translateY(-15px); }
+.purpose-card h3 { color: var(--primary); margin-bottom: 15px; }
