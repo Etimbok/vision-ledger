@@ -1,84 +1,21 @@
-/* RESET EVERYTHING */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Poppins', sans-serif;
+:root { --p: #00f2fe; --s: #4facfe; --bg: #0a0a0c; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
+body { background: var(--bg); color: white; line-height: 1.6; text-align: center; }
+
+.glass-nav { 
+    display: flex; justify-content: space-between; align-items: center; 
+    padding: 20px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.1); 
 }
+.logo { font-size: 1.2rem; font-weight: bold; color: var(--p); }
 
-body {
-    background-color: #0a0a0c;
-    color: white;
-    line-height: 1.6;
-    overflow-x: hidden;
-}
+.hero-section { padding: 40px 20px; }
+h1 { font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2; }
+.gradient-text { background: linear-gradient(90deg, var(--p), var(--s)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-/* NAVIGATION */
-header {
-    background: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-}
+.card-container { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
+.glass-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 320px; text-align: left; }
 
-.glass-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px 8%;
-}
-
-.logo { font-size: 1.5rem; font-weight: 800; color: #00f2fe; }
-
-.nav-links { display: flex; list-style: none; gap: 20px; }
-
-.nav-links a { text-decoration: none; color: #ccc; font-size: 0.9rem; }
-
-/* HERO SECTION */
-.hero-section {
-    padding: 80px 8%;
-    text-align: center;
-}
-
-h1 {
-    font-size: clamp(2rem, 8vw, 4rem);
-    font-weight: 800;
-    margin-bottom: 20px;
-    line-height: 1.1;
-}
-
-/* CARDS */
-.card-container {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    flex-wrap: wrap;
-    padding: 40px 0;
-}
-
-.glass-card {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 30px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    width: 300px;
-    text-align: left;
-}
-
-/* THE MOBILE FIX */
-@media (max-width: 768px) {
-    .glass-nav {
-        flex-direction: column;
-        gap: 15px;
-    }
-    .hero-section {
-        padding-top: 40px;
-    }
-    .card-container {
-        flex-direction: column;
-        align-items: center;
-    }
-    .glass-card {
-        width: 100%;
-        max-width: 320px;
-    }
+@media (min-width: 768px) {
+    .card-container { flex-direction: row; justify-content: center; }
+    h1 { font-size: 3.5rem; }
 }
