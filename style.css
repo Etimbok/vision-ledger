@@ -1,21 +1,86 @@
-:root { --p: #00f2fe; --s: #4facfe; --bg: #0a0a0c; }
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: sans-serif; }
-body { background: var(--bg); color: white; line-height: 1.6; text-align: center; }
-
-.glass-nav { 
-    display: flex; justify-content: space-between; align-items: center; 
-    padding: 20px; background: rgba(255,255,255,0.05); border-bottom: 1px solid rgba(255,255,255,0.1); 
+/* 1. CORE STYLES */
+:root {
+    --primary: #00f2fe;
+    --secondary: #4facfe;
+    --bg-dark: #0a0a0c;
+    --glass: rgba(255, 255, 255, 0.05);
+    --glass-border: rgba(255, 255, 255, 0.12);
 }
-.logo { font-size: 1.2rem; font-weight: bold; color: var(--p); }
 
-.hero-section { padding: 40px 20px; }
-h1 { font-size: 2.2rem; margin-bottom: 20px; line-height: 1.2; }
-.gradient-text { background: linear-gradient(90deg, var(--p), var(--s)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Poppins', sans-serif; }
 
-.card-container { display: flex; flex-direction: column; align-items: center; gap: 20px; padding: 20px; }
-.glass-card { background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px; border: 1px solid rgba(255,255,255,0.1); width: 100%; max-width: 320px; text-align: left; }
+body { 
+    background-color: var(--bg-dark); 
+    color: white; 
+    overflow-x: hidden; 
+    line-height: 1.6;
+}
 
-@media (min-width: 768px) {
-    .card-container { flex-direction: row; justify-content: center; }
-    h1 { font-size: 3.5rem; }
+/* 2. BACKGROUND BLOBS */
+.bg-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; }
+.blob, .blob2 {
+    position: absolute; width: 300px; height: 300px; 
+    background: var(--primary); filter: blur(100px); 
+    border-radius: 50%; opacity: 0.2;
+}
+.blob2 { right: 0; bottom: 0; background: #7000ff; }
+
+/* 3. NAVIGATION */
+.glass-nav {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 20px 8%; background: var(--glass); backdrop-filter: blur(15px);
+    border-bottom: 1px solid var(--glass-border);
+}
+.logo { font-size: 1.5rem; font-weight: 800; }
+.logo span { color: var(--primary); }
+.nav-links { display: flex; list-style: none; gap: 20px; }
+.nav-links a { text-decoration: none; color: #ccc; font-size: 0.9rem; }
+.btn-glow { 
+    padding: 8px 15px; background: transparent; border: 1px solid var(--primary); 
+    color: var(--primary); border-radius: 5px; cursor: pointer;
+}
+
+/* 4. HERO SECTION */
+.hero { padding: 80px 8% 40px; text-align: center; }
+.badge { 
+    background: var(--glass); padding: 5px 15px; border-radius: 20px; 
+    font-size: 0.8rem; border: 1px solid var(--glass-border); color: var(--primary);
+}
+h1 { font-size: clamp(2.2rem, 8vw, 4rem); font-weight: 800; margin: 20px 0; line-height: 1.1; }
+h1 span { color: var(--primary); }
+p { max-width: 600px; margin: 0 auto 30px; color: #aaa; }
+
+.hero-btns { display: flex; justify-content: center; gap: 15px; }
+.btn-primary, .btn-secondary { padding: 12px 25px; border-radius: 50px; border: none; font-weight: 600; cursor: pointer; }
+.btn-primary { background: var(--primary); color: black; }
+.btn-secondary { background: var(--glass); color: white; border: 1px solid var(--glass-border); }
+
+/* 5. TICKER (The moving text) */
+.ticker-wrap { background: rgba(0,0,0,0.5); padding: 10px 0; margin: 40px 0; overflow: hidden; }
+.ticker { display: flex; gap: 50px; white-space: nowrap; animation: slide 20s linear infinite; }
+.ticker-item { font-size: 0.8rem; color: var(--primary); }
+@keyframes slide { from { transform: translateX(100%); } to { transform: translateX(-100%); } }
+
+/* 6. PURPOSE SECTION */
+.purpose-section { padding: 60px 8%; text-align: center; }
+.section-header h2 span { color: var(--primary); }
+.purpose-grid { 
+    display: flex; flex-wrap: wrap; justify-content: center; 
+    gap: 25px; margin-top: 40px; 
+}
+.purpose-card {
+    background: var(--glass); padding: 30px; border-radius: 20px;
+    border: 1px solid var(--glass-border); width: 300px; text-align: left;
+    backdrop-filter: blur(10px);
+}
+.purpose-card .icon { font-size: 2rem; margin-bottom: 15px; }
+
+/* 7. THE "PHONE FIX" */
+@media (max-width: 768px) {
+    .glass-nav { flex-direction: column; gap: 15px; padding: 15px; }
+    .nav-links { gap: 10px; font-size: 0.7rem; }
+    .hero { padding-top: 40px; }
+    .hero-btns { flex-direction: column; align-items: center; }
+    .btn-primary, .btn-secondary { width: 100%; max-width: 280px; }
+    .purpose-card { width: 100%; max-width: 340px; }
 }
